@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+div{
+    border: 1px solid black;
+}
+.smdiv1{
+    float: left;
+    height: 3vh;
+    width: 100%;
+
+}
+.smdiv2{
+    float: left;
+    height: 6vh;
+    width: 100%;
+    
+}
+.smdiv3{
+    float: left;
+    height: 4vh;
+    width: 50%;
+    
+}
+
+.smdiv4{
+    float: right;
+    height: 4vh;
+    width: 50%;
+    
+}
+.smdiv5{
+    float: left;
+    height: 5vh;
+    width: 50%;
+    
+}
+.smdiv6{
+    float: right;
+    height: 15vh;
+    width: 50%;
+    
+}
+.smdiv7{
+    float: left;
+    height: 10vh;
+    width: 50%;
+    
+}
+.smdiv8{
+    float: left;
+    height: 7vh;
+    width: 100%;
+    
+}
+.smdiv9{
+    float: left;
+    height: 14vh;
+    width: 100%;
+    
+}
+@media only screen and (max-width: 800px){
+    /* [class^='div']selector for all classes that begin with word (div)*/
+    /*[class*='div']selector for all classes that begin with word (div)*/
+    .smdiv3,.smdiv4,.smdiv5,.smdiv6,.smdiv7 {
+        width: 50%;
+    }
+    .smdiv8,.smdiv9{
+        width: 100%;
+    }
+} 
+@media only screen and (max-width: 595px){
+    [class^='smdiv']{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 420px){
+    [class^='smdiv']{
+        width: 100%;
+    }
+}

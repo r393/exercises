@@ -1,0 +1,45 @@
+.container{
+    display: grid;
+    height: 100vh;
+    background-color: lemonchiffon;
+    grid-template-rows: 15vh 10vh auto 20vh;
+    grid-template-areas: 'div1 div1 div2 div2 div3 div3 div4 div4 div4'
+                          'div1 div1 div2 div2 div3 div3 div7 div7 div8'
+                            'div5 div5 div6 div6 div3 div3 div7 div7 div8'
+                            'div5 div5 div9 div9 div0 div0 div0 div0 div8';
+     grid-gap: 10px;                       
+}
+.container>div{
+    background-color: lightslategray;
+}
+
+.exer1{
+    grid-area: div1;
+}
+.exer2{
+    grid-area: div2;
+}
+.exer3{
+    grid-area: div3;
+}
+.exer4{
+    grid-area: div4;
+}
+.exer5{
+    grid-area: div5;
+}
+.exer6{
+    grid-area: div6;
+}
+.exer7{
+    grid-area: div7;
+}
+.exer8{
+    grid-area: div8;
+}
+.exer9{
+    grid-area: div9;
+}
+.exer0{
+    grid-area: div0;
+}

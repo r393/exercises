@@ -1,0 +1,20 @@
+@import 'main';
+$fbw5color: rgb(21, 207, 207);
+$mediumFont:25px;
+.container{
+    border: 2px solid black;
+    transform: skew(5deg);
+    >div{
+        background-color: l$fbw5color;
+        &:nth-child(1){
+            font-size: Font;
+            &>p{
+                line-height: 50px;
+            }
+        }
+    }
+    
+}
+.banner{
+    background-color: $fbw5color;
+}

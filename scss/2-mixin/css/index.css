@@ -1,0 +1,16 @@
+.container {
+  color: red;
+  font-size: 50px;
+  border: 5px solid blue;
+  -webkit-box-shadow: 5px 5px 5px blueviolet;
+          box-shadow: 5px 5px 5px blueviolet;
+}
+
+.container > p:hover {
+  -webkit-box-shadow: 5px 5px 5px lightblue;
+          box-shadow: 5px 5px 5px lightblue;
+  color: red;
+  font-size: 50px;
+  border: 5px solid blue;
+}
+/*# sourceMappingURL=index.css.map */

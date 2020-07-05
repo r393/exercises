@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Keypress Event Exercise</title>
+    <script src="./js/index3.js"></script>
+    <link rel="stylesheet" href="./css/index3.css">
+    
+</head>
+
+<body>
+    <h1 class="pageTitle">Invoice</h1>
+    <div id="container">
+        <div class="products">
+            <div class="product">
+                <div>
+                    Product Name
+                </div>
+                <div>
+                    product price
+                </div>
+                <div>
+                    quantity
+                </div>
+                <div>
+                    Total
+                </div>
+            </div>
+            <div class="product">
+                <div>
+                    <input type="text">
+                </div>
+                <div>
+                    <input type="number" min="0" value="0">
+                </div>
+                <div>
+                    <input type="number" min="0" value="0">
+                </div>
+                <div>
+                    <span>0 EUR</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+ <a href="#" id="newProduct">New entry</a>
+ 
+ <span class="sumTotal" >0 Euro</span> 
+ <br>
+ <a href="#" id="invoiceGenerate">Generate Invoice</a>
+ <div id="printSection">
+     <h2> Invoice for printing</h2>
+         <table id="printTable">
+             <thead>
+                <tr>
+                    <td>Product Name</td>
+                    <td>Product price</td>
+                    <td>quantity</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>keyboard</td>                easy 0 1 2 3 4 5 6 7 8 9 10 hard
+                    <td>10 Eur</td>
+                    <td>3</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>mouse</td>
+                    <td>5 Eur</td>
+                    <td>3</td>
+                    <td>15Eur</td>
+                </tr> -->
+            </tbody>
+         </table>
+         <span class = sumTotal>Total 45 Euro</span>
+     
+ </div>
+</body>
+
+</html>

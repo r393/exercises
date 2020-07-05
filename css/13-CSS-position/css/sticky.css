@@ -1,0 +1,8 @@
+.somediv{
+    background-color: red;
+    height: 50px;
+    width:50px;
+    position: sticky;
+    top:10px;
+    left:150px;
+}

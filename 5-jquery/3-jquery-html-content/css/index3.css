@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.collapse{
+    
+    background-color: burlywood;
+    border: 1px solid black;
+}
+.collapse > h2{
+    background-color: coral;
+    padding: 10px;
+}
+.collapse > h2 > span{
+    cursor: pointer;
+}
+.collapse > div {
+    padding: 10px;
+    display: none;
+}

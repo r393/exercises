@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="usernameInp" placeholder="username">
+    <br>
+    <input type="text" name="" id="password">
+    <br>
+    <button id="register">register</button>
+
+    <script>
+        // my front end fetch request code
+        // get input value
+        document.querySelector('#register').addEventListener('click', e => {
+            e.preventDefault()
+            const email = document.querySelector('#usernameInp').value.trim()
+            const password = document.querySelector('#password').value
+            
+            if (email && password ){
+                // create object to be sent
+                const sendData = {
+                    email: email,
+                    password: password
+                    
+                } 
+                
+                // send data using fetch
+                fetch('/register',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(sendData)
+                }).then(response => {
+                    if(response.status === 200){
+                        response.json().then(data => {
+                            if(data === 1){
+                                alert('successfullyregistered ')
+                                document.querySelector('#usernameInp').value =''
+                                document.querySelector('#password').value = ''
+                            }else {
+                                if(data === 3){
+                                    alert('user already exist')
+                                } else{
+                                    alert('something went wrong,please try again later')
+                                }
+                                
+                            }
+                        
+                        }).catch(error => {
+                            alert('unknown response from server')
+                    
+                        })
+                } else {
+                    alert('can not send data')
+                }
+                }).catch(error => {
+                    alert(('can not send data'))
+                })
+            }else {
+                    alert('fill the input correctly and try again')
+                }
+
+        })
+    
+
+
+        
+    </script>
+</body>
+</html>

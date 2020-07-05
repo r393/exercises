@@ -1,0 +1,21 @@
+.product{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product > div > span.gold{
+    background-image: url('../imgs/star-gold.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+}
+.product > div > span.gray{
+    background-image: url('../imgs/star-gray.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+}

@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.div1,.div2,.div3{
+    padding: 2px;
+}
+.div1{
+    height: 40vh;
+    width: 30%;
+    float: left;
+}
+.div2{
+    height:40vh;
+    width: 30%;
+    float: left;
+}
+.div3{
+    height: 40vh;
+    width: 30%;
+    float: right;
+}
+.shape{
+    height: 100%;
+    width: 100%;
+
+}
+.img1{
+    height: ;
+}

@@ -1,0 +1,21 @@
+.product{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.product>div{
+    width: 100px;
+}
+ input{
+    max-width: 80px;
+}
+
+.sumTotal{
+    float: right;
+    margin-right: 50px;
+    font-weight: bold;
+}
+#printTable{
+    width: 100%;
+    text-align: center;
+}

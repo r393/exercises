@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js student management</title>
+    <script src="./js/index.js"></script>
+</head>
+<body>
+    <h3>StudentID: <span id="studentIDSpan"></span></h3>
+    <input type="text" id="studentNameInp" placeholder="Student name">
+    <br>
+    <br> 
+    <select id="coursesList">
+        <option value="">Select Course</option>
+        <option value="Math">Math</option>
+        <option value="English">English</option>
+        <option value="Computer science1">Computer science1</option>
+        <option value="java">Java</option>
+    </select>
+    <input type="number" id="studentGradeInp" placeholder="Student name" min="0" max="100">
+    <br>
+    <br>
+    <button id="addGradeBtn">add Grade</button>
+    <ul id="gradeListElement">
+        <!-- <li>Math: 80%</li>
+        <li>English: 80%</li> -->
+    </ul>
+    <button id="saveStudentBtn">Save student</button>
+    
+</body>
+</html>

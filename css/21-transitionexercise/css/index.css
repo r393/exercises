@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav>ul{
+    list-style-type: none;
+    /* background-color: lightcyan; */
+    height: 50px;
+    text-align: center;
+    margin: auto;
+    width: 381px;
+    padding-left:20px ;
+    padding-top: 5px;
+}
+nav>ul>li{
+    /* padding: 10px; */
+    padding-top:10px ;
+    padding-bottom:10px ;
+    float: left;
+    margin-right: 20px;
+    background-color: black;
+    color: white;
+    width:100px;
+    border-radius: 10px 0 10px 0;
+}
+nav>ul>li>label{
+    display: block;
+}
+nav>ul>li>label:hover{
+    font-weight: bolder;
+    /* background-color: white; */
+    /* color: black; */
+    font-size: 25px;
+    /* box-shadow: 5px 5px 5px black; */
+}
+.banner{
+    margin-top: 10px;
+    background-image: url(../imgs/hero.jpg);
+    background-position: 35% 23%;
+    /* background-size: cover; */
+    height: 80vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    clip-path: polygon(0 0, 100% 0, 100% 60vh, 0 100%);
+
+}
+section, input{
+    display: none;
+}
+input:checked + section{
+    display: block;
+}
+.badclass{
+    /* width: 150%; */
+}
+.dropdown{
+    position: relative;
+    z-index: 5;
+    display: none;
+}
+.dropdown>ul{
+    background-color: black;
+    list-style-type: none;
+}
+.dropdown>ul>li{
+    margin-bottom: 5px;
+    width: 100px ;
+    text-align: center;
+}
+.dropdown>ul>li>a{
+    text-decoration: none;
+    color: white;
+    background-color: gray;
+    display: block;
+    border-radius: 10px 0 10px 0;
+}
+.dropdown>ul>li>a:hover{
+    font-size: 20px;
+}
+
+nav>ul>li:hover>.dropdown{
+    display: block;
+}
+
+@media only screen and (max-width:390px){
+    
+    nav>ul{
+        width: 100%;
+        height: 150px;
+        padding-left: 0;
+    }
+    nav>ul>li{
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    body{
+        background-color: red;
+    }
+}
+@media only screen and (min-width:390px){
+    body{
+        background-color: blue;
+    }
+}
+@media only screen and (min-width:1200px){
+    body{
+        background-color: green;
+    }
+}

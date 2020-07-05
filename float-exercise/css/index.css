@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+   
+}
+
+ .dv1,.dv2,.dv3{
+     padding: 2px;
+ }
+
+.dv1{
+    float: left;
+    /*background-color: lightgreen;*/
+    height: 100px;
+    width: 25%;
+    /*border: 1px solid black;*/
+}
+.dv2{
+    float: left;
+    /*background-color: brown;*/
+    height: 100px;
+    width: 50%;
+    /*border: 1px solid black;*/
+}
+
+.dv3{
+    float: left;
+    /*background-color: goldenrod;*/
+    height: 100px;
+    width: 25%;
+    /*border: 1px solid black;*/
+}
+.subdiv{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+
+}
+

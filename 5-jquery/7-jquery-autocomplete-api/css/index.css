@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+#productInput{
+    width: 200px;
+}
+.autocompleteclass{
+    background-color: rgb(199,180, 199);
+    list-style-type: none;
+    width: 200px;
+}
+.autocompleteclass>li{
+    margin-top: 5px;
+}

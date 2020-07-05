@@ -1,0 +1,11 @@
+{
+  "name": "1-nodejs-start",
+  "version": "1.0.0",
+  "description": "this is the first node app in FBW5",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "Rebecca",
+  "license": "ISC"
+}

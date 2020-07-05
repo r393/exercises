@@ -1,0 +1,32 @@
+.animated{
+    background-color: blueviolet;
+    width: 100px;
+    height: 100px;
+    animation-name: FBW5;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes FBW5{
+    from{
+        width: 100px;
+        background-color: blueviolet;
+
+    }
+    to{
+        width: 500px;
+        background-color: lightpink;
+    }
+    0%{
+        width: 100px;
+        background-color: blueviolet;
+    }
+    50%{
+        width: 500px;
+        background-color: lightpink;
+    }
+    100%{
+        width: 100px;
+        background-color: blueviolet;
+    }
+}

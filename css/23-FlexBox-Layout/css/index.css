@@ -1,0 +1,31 @@
+.flexDiv{
+display: inline-flex;
+vertical-align: top;
+width: 200px;
+/*children layout direction*/
+flex-direction: column;/*row, column, column-reverse*/
+/*the behavior that the children will do when the container width less than the sum of their width*/
+flex-wrap: wrap;/*wrap, nowrap*/
+/*flex-flow: row wrap;*//*shorthand for flex-direction and flex-wrap*/
+/*align children horizontally*/
+justify-content: space-around ;/*flex-start,center,flex-end,space-around, space-between*/
+/*align children verticaly*/
+align-items: center;/*flex-start, flex-end, center*/
+background-color: lightgray;
+}
+.flexDiv>div{
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 100px;
+    color: white;
+    font-size: 40px;
+    background-color: aqua;
+}
+.nextDiv{
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}

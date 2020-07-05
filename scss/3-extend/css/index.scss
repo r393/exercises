@@ -1,0 +1,13 @@
+.sharedClass{
+    color: red;
+    font-size: 50px;
+}
+.extendedClass{
+    @extend .sharedClass;
+    border: 5px solid green;
+    & > div > span{
+        @extend .sharedClass;
+        margin: auto;
+        display: block;
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "users": [{
+        "id": "1",
+        "email": "rebecca@rebec.com",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }, {
+        "id": 2,
+        "email": "gggff",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }, {
+        "id": 3,
+        "email": "gggffd",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }, {
+        "id": 4,
+        "email": "qqds",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }, {
+        "id": 5,
+        "email": "rebec",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }, {
+        "id": 6,
+        "email": "dd@ff.gg",
+        "password": "sha1$1070e910$1$038ccd86ee6f38744e6bc805591a66002e0e8842"
+    }],
+    "newId": 7
+}

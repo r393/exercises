@@ -1,0 +1,31 @@
+.container{
+    display: grid;
+    height: 100vh;
+    background-color: mediumslateblue;
+    grid-template-rows: 20vh auto 20vh;
+    grid-template-areas: 'header header header' 
+                          'menu main right' 
+                          'menu footer footer';
+    grid-gap: 10px
+}
+
+
+.container div{
+    background-color: lightcyan;
+}
+.header{
+    grid-area: header;
+}
+.menu{
+    grid-area: menu;
+}
+.main{
+    grid-area: main;
+}
+.right{
+    grid-area: right;
+
+}
+.footer{
+    grid-area: footer;
+}

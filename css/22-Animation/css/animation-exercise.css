@@ -1,0 +1,113 @@
+.smoke{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+}
+.smoke span{
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: -40px;
+    left: -20px;
+    border: 40px solid rgb(41,36, 36);
+    border-radius: 40px;
+}
+
+
+@keyframes smokeleft{
+    0%{
+        transform: scale(0.2) translate(0,0);
+    }
+    10%{
+        opacity: 1;
+        transform: scale(0.2) translate(0, -5px);
+    }
+    100%{
+        opacity: 0;
+        transform: scale(1) translate(-20px,-140px);
+    }
+}
+@keyframes smokeright{
+    0%{
+        transform: scale(0.2) translate(0,0);
+    }
+    10%{
+        opacity: 1;
+        transform: scale(0.2) translate(0,-5px);
+    }
+    100%{
+        opacity: 0;
+        transform: scale(1) translate(20px,-140px);
+    }
+}
+.s1{
+    animation-name: smokeleft;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+}
+
+.s2{
+    animation-name: smokeright;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+}
+.s3{
+    animation-name: smokeleft;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 2s;
+}
+.s4{
+    animation-name: smokerigth;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 3s;
+}
+.s5{
+    animation-name: smokeleft;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 4s;
+}
+.s6{
+    animation-name: smokeright;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 5s;
+}
+.s7{
+    animation-name: smokeleft;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 6s;
+}
+.s8{
+    animation-name: smokeright;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 7s;
+}
+.s9{
+    animation-name: smokeleft;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 8s;
+}
+.s10{
+    animation-name: smokeright;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-delay: 9s;
+}
+.rectangle{
+    height: 10px;
+    width: 80px;
+    background-color: sandybrown;
+    left: -px;
+    bottom:-30px;
+}
+
+

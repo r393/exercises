@@ -1,0 +1,88 @@
+{
+    "books": [{
+        "id": 1,
+        "title": "tiger",
+        "description": "<p>wsdasd</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 2,
+        "title": "tiger1",
+        "description": "<p>inspiring</p>",
+        "imgs": ["/uploadedfiles/tiger1_1_0.jpg"],
+        "pdfUrl": "/uploadedfiles/tiger1_1.pdf",
+        "userid": 1
+    }, {
+        "id": 3,
+        "title": "tiger1",
+        "description": "<p>inspiring</p>",
+        "imgs": ["/uploadedfiles/tiger1_1_0.jpg"],
+        "pdfUrl": "/uploadedfiles/tiger1_1.pdf",
+        "userid": 1
+    }, {
+        "id": 4,
+        "title": "tiger",
+        "description": "<p>Educative</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png", "/uploadedfiles/tiger_1_1.png", "/uploadedfiles/tiger_1_2.gif"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 5,
+        "title": "tiger1",
+        "description": "<p>books</p>",
+        "imgs": ["/uploadedfiles/tiger1_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger1_1.pdf",
+        "userid": 1
+    }, {
+        "id": 6,
+        "title": "tiger",
+        "description": "<p>inspiring</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 7,
+        "title": "tiger1",
+        "description": "<p style=\"text-align: center;\">deutschkurs details</p>",
+        "imgs": ["/uploadedfiles/tiger1_1_0.png", "/uploadedfiles/tiger1_1_1.jpg", "/uploadedfiles/tiger1_1_2.gif"],
+        "pdfUrl": "/uploadedfiles/tiger1_1.pdf",
+        "userid": 1
+    }, {
+        "id": 8,
+        "title": "tiger",
+        "description": "<p>books</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 9,
+        "title": "tiger",
+        "description": "<p>fhjk</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 10,
+        "title": "tiger",
+        "description": "<p>testtesttest</p>",
+        "imgs": ["/uploadedfiles/tiger_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger_1.pdf",
+        "userid": 1
+    }, {
+        "id": 11,
+        "title": "tiger1",
+        "description": "<p>testtest</p>",
+        "imgs": ["/uploadedfiles/tiger1_1_0.png"],
+        "pdfUrl": "/uploadedfiles/tiger1_1.pdf",
+        "userid": 1
+    }, {
+        "id": 12,
+        "title": "tito",
+        "description": "<p style=\"text-align: center;\">Books:</p>\n<p style=\"text-align: center;\">inspiring</p>\n<p>&nbsp;</p>",
+        "imgs": ["/uploadedfiles/tito_1_0.jpeg", "/uploadedfiles/tito_1_1.jpeg", "/uploadedfiles/tito_1_2.jpeg"],
+        "pdfUrl": "/uploadedfiles/tito_1.pdf",
+        "userid": 1
+    }],
+    "newid": 13
+}

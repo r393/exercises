@@ -1,0 +1,143 @@
+nav>ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: burlywood;
+    display: flex;
+    
+}
+nav>ul>li{
+    margin: 15px;
+    background-color: rgb(161, 125, 78);
+    border-radius: 10px 0 10px 0;
+}
+nav>ul>li:hover{
+    background-color:brown;
+    color: white;
+    box-shadow: 10px 10px 5px brown;
+    transform: scale(1.2);
+}
+nav>ul>li:hover>a{
+    color: white;
+}
+nav>ul>li>a{
+    display:block;
+    text-decoration: none;
+    padding: 10px;
+    color: brown;
+}
+
+/* navigation ends here*/
+/* banner start here*/
+.banner{
+    height: 80vh;
+    background-image: url('../img/hero.jpg');
+    background-position-y:40% ;
+    background-position-x: 30%;
+    clip-path: polygon(0 0,100% 0,100% 60vh, 0 80vh);
+    margin-top: 10px;
+}
+/* banner end here*/
+h2{
+    color: green;
+    text-align: center;
+}
+.leftdiv{
+    float: left;
+    width: 20%;
+    height: 70vh;
+    background-color: grey;
+
+}
+/* cards secton starts here*/
+
+.cards{
+    width: 60vh;
+    margin: auto;
+}
+.cards-container{
+    display: flex;
+    justify-content: space-between;
+}
+.card{
+    border: 2px solid gray;
+    width: 200px;
+}
+.cards>h2{
+    text-align: center;
+}
+.card-head>h3{
+    text-align: center;
+}
+.card-content{
+    margin: 5px;
+    border-top: 1px solid gray;
+}
+/*card section ends here*/
+/*.middlediv{
+    float: middle;
+    width: 40%;
+    height: 70vh;
+    background-color:goldenrod;
+
+}
+.rightdiv{
+    float: right;
+    width: 20%;
+    height: 70vh;
+    background-color: gray;
+
+}*/
+
+
+@media only screen and (max-width:480px){
+    nav>ul{
+    flex-direction: column;
+    }
+    nav>ul>li>a{
+    text-align: center;
+    }
+    nav>ul>li{
+    margin: 3px;
+    }
+    .cards-container{
+        flex-direction: column;
+    }
+    .cards{
+        margin: 0;
+        width: 100%;
+    }
+    .card{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    /*footer start from here*/
+    .footer{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: rgba(0, 0, 0, 0.74);
+    }
+    .logo-container>img{
+        width: 150px;
+    }
+    .contact-container>ul,
+    .social{
+        list-style-type: none;
+        padding: 0;
+        margin-left:10px ;
+    }
+    .contact-container>u>li>a,
+    .social>li>a{
+        color: white;
+        text-decoration: none;
+    }
+    .input-container>input,.input-container>textarea{
+        margin: 10px;
+    }
+    footer-btn{
+        margin-left: 10px;
+        border-radius: 10px;
+    }
+    /*footer ends here*/
+
+}

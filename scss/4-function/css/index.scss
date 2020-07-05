@@ -1,0 +1,10 @@
+@function XposCalc($parentWidth, $childwidth) {
+    $result : ($parentWidth / 2 ) - ($childwidth / 2);
+    @return $result;
+}
+
+.blaClass{
+    position: absolute;
+    width: 50px;
+    left: XposCalc(100px, 50px);
+}

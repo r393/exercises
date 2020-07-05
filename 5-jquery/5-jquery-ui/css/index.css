@@ -1,0 +1,20 @@
+.list > li > h2 > span{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url("../imgs/handler.png");
+    background-size: cover;
+    margin-right: 20px;
+}
+.list{
+    list-style-type: none;
+    padding: 0;
+}
+.list > li{
+    margin-top: 10px;
+    background-color: blanchedalmond;
+}
+.list > li.unsortable{
+    margin-top: 10px;
+    background-color: gray;
+}

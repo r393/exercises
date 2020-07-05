@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.content{
+    padding: 10px;
+    width: 50%;
+}
+.content>h2{
+    margin-bottom: 15px;
+}

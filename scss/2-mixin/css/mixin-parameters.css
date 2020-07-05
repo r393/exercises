@@ -1,0 +1,14 @@
+.blaClass {
+  -webkit-box-shadow: 5px 5px 5px lightgrey;
+          box-shadow: 5px 5px 5px lightgrey;
+  color: lightgrey;
+  font-size: 30px;
+  border: 5px solid green;
+}
+
+.blblaClass {
+  color: red;
+  font-size: 50px;
+  border: 5px solid green;
+}
+/*# sourceMappingURL=mixin-parameters.css.map */

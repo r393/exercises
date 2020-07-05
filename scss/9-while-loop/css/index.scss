@@ -1,0 +1,9 @@
+$start: 1;
+$end: 11;
+
+@while $start < $end {
+    .col-#{$start}{
+        color: red;
+    }
+    $start : $start + 1;
+}

@@ -1,0 +1,14 @@
+.sharedClass, .extendedClass, .extendedClass > div > span {
+  color: red;
+  font-size: 50px;
+}
+
+.extendedClass {
+  border: 5px solid green;
+}
+
+.extendedClass > div > span {
+  margin: auto;
+  display: block;
+}
+/*# sourceMappingURL=index.css.map */

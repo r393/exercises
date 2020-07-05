@@ -1,0 +1,38 @@
+.somediv{
+    position: relative;
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    color: white;
+    font-size: 30px;
+    /*transform: translatex(45px);*/
+    
+    /*transform: skewy(10deg);rotate, rotatex*/
+}
+/*.somediv:hover{
+    transform: rotate(90deg);
+}*/
+/*.somediv span{
+    
+    display: inline-block;
+    transform: translate(70px, 80px);
+}*/
+/*.somediv span{
+    
+    display: inline-block;
+    transform: translate(74px, 83px);
+    width: 52px;
+    height: 34;
+}*/
+/*.somediv span{
+    position: absolute;
+    background-color: blue;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}*/
+.somediv span{
+    position: absolute;
+    background-color: blue;
+    transform: translate(calc(100px - 50%), calc(100px - 50%));
+}
