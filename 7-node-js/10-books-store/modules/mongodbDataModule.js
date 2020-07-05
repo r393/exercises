@@ -50,7 +50,7 @@ function checkUser (email, password){
     return new Promise((resolve, reject) => {
         connect().then(client => {
             const db = client.db('test1')
-            db.collection('users').findeOne({email: email}).then(user =>{
+            db.collection('users').findOne({email: email}).then(user =>{
                 client.close()
                 if(user){
                     if(passwordHash.verify(password, user.password)){
