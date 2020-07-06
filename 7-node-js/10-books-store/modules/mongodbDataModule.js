@@ -1,6 +1,5 @@
 const passwordHash = require('password-hash')
 const {MongoClient, ObjectID} = require('mongodb')
-const { promiseImpl } = require('ejs')
 const connectionString = 'mongodb+srv://reb:123456ab@cluster0.lh6tv.mongodb.net/test1?retryWrites=true&w=majority'
 
 function connect() {
@@ -86,11 +85,11 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
                 } else {
                     //create images array to be saved in database
                     const imgsArr = []
-                    bookImgs.forEach(img, idx=> {
+                    bookImgs.forEach((img, idx)=> {
                         // get file extension
                         let ext = img.name.substr(img.name.lastIndexOf('.'))
                         //set the new image name
-                        let newName = bookTitle.trim().replace(/ /g,'_')+ '_' + 1 + '_' + idx + ext
+                        let newName = bookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx + ext
                         img.mv('./public/uploadedfiles/' + newName)
                         imgsArr.push('/uploadedfiles/' + newName)
                     })
@@ -111,7 +110,7 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
                         userid: userid
                     }).then(response => {
                         client.close()
-                        if(response.reset.ok){
+                        if(response.result.ok){
                             resolve()
                         }else {
                             reject(new Error ('can not insert a book'))
@@ -130,10 +129,55 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
     })
 }
 
+function getAllBooks(){
+    return new Promise((resolve, reject) => {
+        connect().then(client => {
+            const db = client.db('test1')
+            db.collection('books').find().toArray().then(books => {
+                // add id property to each book instead of _id
+                // this is how ituse in ejs
+                books.forEach(book => {
+                    book['id'] = book['_id']
+                })
+                client.close()
+                resolve(books)
+            }).catch(error => {
+                client.close()
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+
+}
+function getBook(id){
+    return new Promise((resolve, reject) => {
+        connect().then(client => {
+            const db = client.db('test1')
+            db.collection('books').findOne({_id: new objectID(id)}).then(book => {
+                client.close()
+                if(book){
+                    book.id = book._id
+                    resolve(book)
+                }else{
+                    reject(new Error('can not boot with this id :' + id))
+                }
+            }).catch(error => {
+                client.close()
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
 
 module.exports = {
     
     registerUser,
     checkUser,
-    addBook
+    addBook,
+    getAllBooks,
+    getBook
 }
