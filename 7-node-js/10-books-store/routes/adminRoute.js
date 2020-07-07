@@ -11,6 +11,9 @@ adminRouter.use((req, res, next) =>{
     }
 })
 adminRouter.get('/', (req, res) => {
+    res.render('admin', {email: req.session.user.email})
+})
+adminRouter.get('/', (req, res) => {
     console.log(req.session.user)
     res.render('admin')
 })
@@ -52,5 +55,18 @@ adminRouter.post('/addbook',(req, res) =>{
 }
     
 })
+
+adminRouter.get('/mybooks',(req, res) => {
+    dataModule.userBooks(req.session.user._id).then(books => {
+        res.render('mybooks',{books})
+    }).catch(error => {
+        res.send("404. page cannot be found")
+    })
+})
+adminRouter.get('/logout',(req, res) => {
+    req.session.destroy()
+    res.redirect('/login')
+})
+
 module.exports = 
     adminRouter

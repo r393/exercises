@@ -155,7 +155,7 @@ function getBook(id){
     return new Promise((resolve, reject) => {
         connect().then(client => {
             const db = client.db('test1')
-            db.collection('books').findOne({_id: new objectID(id)}).then(book => {
+            db.collection('books').findOne({_id: new ObjectID(id)}).then(book => {
                 client.close()
                 if(book){
                     book.id = book._id
@@ -173,11 +173,35 @@ function getBook(id){
     })
 }
 
+function userBooks(userid){
+    return new Promise((resolve, reject) => {
+        connect().then(client => {
+            const db = client.db('test1')
+            db.collection('books').find({userid: userid}).toArray().then(books => {
+                // add id property to each book instead of _id
+                // this is how ituse in ejs
+                books.forEach(book => {
+                    book['id'] = book['_id']
+                })
+                client.close()
+                resolve(books)
+            }).catch(error => {
+                client.close()
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+
+}
+
 module.exports = {
     
     registerUser,
     checkUser,
     addBook,
     getAllBooks,
-    getBook
+    getBook,
+    userBooks
 }

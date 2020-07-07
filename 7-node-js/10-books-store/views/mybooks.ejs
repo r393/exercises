@@ -35,7 +35,7 @@
                             <li class="navbar-item">
                                 <a href="index.html" class="nav-link">Home</a>
                             </li>
-                            <li class="navbar-item">
+                            <li class="navbar-item active">
                                 <a href="shop.html" class="nav-link">Shop</a>
                             </li>
                             <li class="navbar-item">
@@ -44,7 +44,7 @@
                             <li class="navbar-item">
                                 <a href="faq.html" class="nav-link">FAQ</a>
                             </li>
-                            <li class="navbar-item active">
+                            <li class="navbar-item">
                                 <a href="login.html" class="nav-link">Login</a>
                             </li>
                         </ul>
@@ -65,31 +65,30 @@
     <div class="breadcrumb">
         <div class="container">
             <a class="breadcrumb-item" href="index.html">Home</a>
-            <span class="breadcrumb-item active">Register</span>
+            <span class="breadcrumb-item active">Shop</span>
         </div>
     </div>
-    <h1>My Account / Admin</h1>
-    <br>
-    <br>
-    <section class="slider">
+    <section class="static about-sec">
         <div class="container">
-             <div class="col-md-12">
-                 <h1>Welcome <%=email%></h1>
-                    <a href="/admin/addbook">Add Book</a>
-                    <br>
-                    <a href="/admin/mybooks">My Books</a>
-                    <br>
-                    <a href="/admin/shop">Shop</a>
-                    <br>
-                    <a href="/admin/register">Register</a>
-                    <br>
-                    <a href="/admin/logout">Logout</a>
+            <h2>My books</h2>
+            <div class="recent-book-sec">
+                <div class="row">
+                    <%for (let i = 0; i < books.length; i++){%>
+                    <div class="col-md-3">
+                        <div class="item">
+                            <img class="bookimage" src="<%= books[i].imgs[0]%>" alt="img">
+                            <h3><a href="/admin/mybook/<%=books[i].books[i].id%>"><%= books[i].title%></a></h3>
+                            <h6><a href="/admin/mybook/<%=books[i].book[i].id%>">Download</a></h6>
+                        </div>
+                    </div>
+                    <%}%>
                 </div>
-
+                <div class="btn-sec">
+                    <button class="btn gray-btn">load More books</button>
+                </div>
             </div>
         </div>
-</section>
-
+    </section>
     <footer>
         <div class="container">
             <div class="row">
@@ -172,90 +171,7 @@
             </div>
         </div>
     </footer>
-    <div class="modal" tabindex="-1" role="dialog" id="resultModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
     <%- include('partials/htmlJs')%>
-
-    <script>
-        // my front end fetch request code
-        // get input value
-        document.querySelector('#registerBtn').addEventListener('click', e => {
-            e.preventDefault()
-            const email = document.querySelector('#emailInp').value.trim()
-            const password = document.querySelector('#passInp').value.trim()
-            const repassword = document.querySelector('#repassInp').value.trim()
-            if (email && password && password == repassword){
-                // create object to be sent
-                const sendObj = {
-                    email,
-                    password,
-                    repassword
-                }
-                
-                // send data using fetch
-                fetch('/register',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify(sendObj)
-                }).then(response => {
-                    if(response.status == 200){
-                        response.json().then(data => {
-                            //console.log(data)
-
-                            switch (data){
-                                case 1:
-                                    showModal(false, "Register-Success","you can proceed to login page...")
-                                    break;
-                                case 2:
-                                    showModal(true, "missing entries","you miss some entries or password already in use..")
-                                    break;  
-                                case 3:
-                                    showModal(true, "Email is register","This email already exist...")
-                                    break; 
-                                case 4:
-                                    showModal(true, "Server Error","something unexpected happen...")
-                                    break;     
-                            }
-                        }).catch(error => {
-                            console.log(error);
-                            showModal(true,"error on getting data")
-                    
-                        })
-                }
-                }).catch(error => {
-                    console.log(error);
-                    showModal(true,"error on getting data")
-                })
-            } else {
-                showModal(true, "missing entries", " you miss some entries or your password does not match")
-            }
-
-        })
-    
-
-
-        
-    </script>
-
 </body>
 
 </html>
