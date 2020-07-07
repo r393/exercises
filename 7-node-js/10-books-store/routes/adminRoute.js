@@ -13,10 +13,7 @@ adminRouter.use((req, res, next) =>{
 adminRouter.get('/', (req, res) => {
     res.render('admin', {email: req.session.user.email})
 })
-adminRouter.get('/', (req, res) => {
-    console.log(req.session.user)
-    res.render('admin')
-})
+
 adminRouter.get('/addbook',(req, res) =>{
     res.render('addbook')
 })
@@ -66,6 +63,14 @@ adminRouter.get('/mybooks',(req, res) => {
 adminRouter.get('/logout',(req, res) => {
     req.session.destroy()
     res.redirect('/login')
+})
+adminRouter.get('/mybook/:id', (req, res) => {
+    const bookid = req.params.id
+    dataModule.getBook(bookid).then(book => {
+        res.render('editbook',{book})
+    }).catch(error => {
+        res.send('this book does not exist ')
+    })
 })
 
 module.exports = 
