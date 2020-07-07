@@ -91,7 +91,7 @@
                         <%for(let i = 0; i < book.imgs.length; i++){%>
                             <div class="col-md-3">
                                 <a href="#" class="deleteImg">X</a>
-                                <img src="<%=book.imgs[i]%>" alt="">
+                                <img class="bookimg" src="<%=book.imgs[i]%>" alt="">
                             </div>
                             <%}%>
                         </div>
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Book PDF</label>
                         <span class="badge badge-default"><%=book.pdfUrl.substr(book.pdfUrl.lastIndexOf('/')+1)%> <a href="#" id="deletePdf">X</a></span>
-                        <input type="file" class="form-control-file" id="bookPdfInp" accept="application/pdf">
+                        <input type="file" class="form-control-file" id="bookPdfInp" accept="application/pdf" disabled>
                     </div>
                     <div class="form-group">
                         <label for="bookDescriptionInp">Example textarea</label>
@@ -357,7 +357,80 @@
                 }
             ]
         });
+        
+                
+        document.querySelectorAll('.deleteImg').forEach(element => {
+            element.addEventListener('click', e => {
+                e.preventDefault()
+                e.target.parentElement.remove()
+            })
+        })
+        document.querySelector('#deletePdf').addEventListener('click',e => {
+            e.preventDefault()
+            e.target.parentElement.remove()
+            // enable pdf file upload
+            document.querySelector('#bookPdfInp').disabled = false
+        })
+        document.querySelector('#bookSaveBtn').addEventListener('click', e => {
+            e.preventDefault()
+            const bookTitle = document.querySelector('#bookTitleInp').value.trim()
+                if(!bookTitle){
+                    showModal(true,'Book title is empty','Book Title should not be empty')
+                    // return is going to stop idf book title is empty
+                    return
+                }
+                const oldImgsElements = document.querySelectorAll('.bookimg')
+                const newBookImgs = document.querySelector('#bookImgsInp').files
+                //check if the upload images or left some old images
+                if(oldImgsElements.length == 0 && newBookImgs.length == 0){
+                   showModal(true, 'images error','You cannot save your book without image')
+                   return
+                }
+                const deletePdf = document.querySelector('#deletePdf')
+                const bookPdf = document.querySelector('#bookPdfInp').files
+                if(!deletePdf && bookPdf.length == 0){
+                    showModal(true, 'Pdf Error', 'you need either to upload a pdf file or leave the old one')
+                    return
+                }
+                //collect the data to be sent to the server side
+                const fd = new FormData()
+                fd.append('newBookTitle', bookTitle)
+                // collect old images urls
+                const oldImgsArr = []
+                oldImgsElements.forEach(img => {
+                    oldImgsArr.push(img.src)
+                })
+                // convert oldimgsArr to string to be able add it in fd
+                // because FormData accept only strings
+                fd.append('oldImgsUrls', JSON.stringify(oldImgsArr))
+                
+                // add new book images to fd
+                for (let i = 0; i < newBookImgs.length; i++) {
+                    fd.append('bookImg' + i, newBookImgs[i])
+                    
+                }
+                // newBookImgs.forEach((img, idx) => {
+                //     fd.append('bookImg' + idx, img)
+                // })
 
+                // add the upload pdf file to fd IF exist
+                if(bookPdf.length){
+                    fd.append('bookPdf', bookPdf[0])
+                }
+                fd.append('bookDescription', tinymce.get("bookDescriptionInp").getContent())
+                fetch('/admin/editbook', {
+                    method: 'POST',
+                    body: fd
+                }).then(response => {
+                    if(response.status == 200){
+
+                    }else {
+                        showModal(true,'Error','can not send the data')
+                    }
+                }).catch(error => {
+                    showModal(true,'Error','can not send the data')
+                })
+        })
 
         // sent a post request to the server to check the name and id of the user
         //  document.querySelector('#bookSaveBtn').addEventListener('click', (e) => {
@@ -428,26 +501,6 @@
         //         })
         // })
 
-                
-        document.querySelectorAll('.deleteImg').forEach(element => {
-            element.addEventListener('click', e => {
-                e.preventDefault()
-                e.target.parentElement.remove()
-            })
-        })
-        document.querySelector('#deletePdf').addEventListener('click',e => {
-            e.preventDefault()
-            e.target.parentElement.remove()
-        })
-        document.querySelector('#bookSaveBtn').addEventListener('click', e => {
-            e.preventDefault()
-            const bookTitle = document.querySelector('#bookTitleInp').value.trim()
-                if(!bookTitle){
-                    showModal(true,'Book title is empty','Book Title should not be empty')
-                    return
-                }
-             alert('ok')
-        })
 
     </script>
 

@@ -72,6 +72,13 @@ adminRouter.get('/mybook/:id', (req, res) => {
         res.send('this book does not exist ')
     })
 })
+adminRouter.post('/editbook',(req, res) => {
+    const {newBookTitle, oldImgsUrls, bookDescription }= req.body
+    console.log(newBookTitle, oldImgsUrls, bookDescription );
+    res.json(1)
+    
+})
+
 
 module.exports = 
     adminRouter
