@@ -73,9 +73,35 @@ adminRouter.get('/mybook/:id', (req, res) => {
     })
 })
 adminRouter.post('/editbook',(req, res) => {
-    const {newBookTitle, oldImgsUrls, bookDescription }= req.body
-    console.log(newBookTitle, oldImgsUrls, bookDescription );
-    res.json(1)
+    const {newBookTitle, oldImgsUrls, bookDescription, bookid} = req.body
+    //console.log(newBookTitle, oldImgsUrls, bookDescription,bookid );
+    console.log(req.files)
+    let newPdfBook = null
+    let newImgs = []
+    // get the upload files and classify that to either pdf or images
+    if(req.files){
+        newPdfBook = req.files.bookPdf
+        for (const key in req.files){
+            if(req.files[key].mimetype != 'application/pdf'){
+                newImgs.push(req.files[key])
+            }
+        }
+    }
+    let oldImgsUrlsArr = JSON.parse(oldImgsUrls)
+    //console.log(oldImgsUrlsArr)
+    //delete the domain from the img urls
+
+    oldImgsUrlsArr = oldImgsUrlsArr.map(element => {
+        return element.substr(element.indexOf('/uploadedfiles/'))
+    })
+    //console.log(oldImgsUrlsArr)
+
+     dataModule.updateBook(bookid, newBookTitle, oldImgsUrlsArr, bookDescription, newPdfBook, newImgs,req.session.user._id).then(() =>{
+        res.json(1)
+     }).catch(error => {
+         res.json(2)
+
+     })
     
 })
 

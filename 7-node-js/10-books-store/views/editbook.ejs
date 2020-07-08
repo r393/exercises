@@ -394,6 +394,9 @@
                 }
                 //collect the data to be sent to the server side
                 const fd = new FormData()
+                // ad book id to fd
+                debugger
+                fd.append('bookid','<%=book.id%>')
                 fd.append('newBookTitle', bookTitle)
                 // collect old images urls
                 const oldImgsArr = []
@@ -423,7 +426,15 @@
                     body: fd
                 }).then(response => {
                     if(response.status == 200){
-
+                        response.json().then(data => {
+                            if (data == 1){
+                                showModal(false, 'success update','You update successfully')
+                            } else {
+                                showModal(true, 'success error','call admin to fix this error')
+                            }
+                        }).catch(error => {
+                            showModal(true, 'success error','call admin to fix this error')
+                        })
                     }else {
                         showModal(true,'Error','can not send the data')
                     }
