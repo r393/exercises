@@ -65,7 +65,7 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs){
         // set a new pdf file name
         let pdfName = bookTitle.trim().replace(/ /g, '_') + '_' + 1 + '.pdf'
 
-        // move the pdf file with the new namw to uploadedfiles folder
+        // move the pdf file with the new name to uploadedfiles folder
         bookPdf.mv('./public/uploadedfiles/' + pdfName)
 
         // set the pdf ur that goin to be saved in the json file

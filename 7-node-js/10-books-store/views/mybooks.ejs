@@ -78,7 +78,7 @@
                         <div class="item">
                             <img class="bookimage" src="<%= books[i].imgs[0]%>" alt="img">
                             <h3><a href="/admin/mybook/<%=books[i].id%>"><%= books[i].title%></a></h3>
-                            <h6><a href="/admin/mybook/<%=books[i].id%>">Download</a></h6>
+                            <h6><a href="/admin/mybook/<%=books[i].id%>">Edit</a>&nbsp;&nbsp;<a class="showDeleteModalBtn" bookid="<%=books[i].id%>" href="#">Delete</a>
                         </div>
                     </div>
                     <%}%>
@@ -171,7 +171,88 @@
             </div>
         </div>
     </footer>
+    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirmModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title">Warning Alert!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This book and order related files will be deleted and cannot be retrieved.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="background-color: red;" id="deleteBookBtn" data-dismiss="modal">Delete</button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="resultModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <%- include('partials/htmlJs')%>
+
+    <script>
+        let bookid;
+        document.querySelectorAll('.showDeleteModalBtn').forEach(btn => {
+            btn.addEventListener('click', e =>{
+            e.preventDefault()
+            $('#deleteConfirmModal').modal('show')
+            
+            bookid = e.target.getAttribute('bookid')
+            
+        })   
+        })
+
+        document.querySelector('#deleteBookBtn').addEventListener('click', e => {
+            e.preventDefault()
+            fetch('/admin/deletebook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({bookid})
+            }).then(response => {
+                // hide the delete confirmation modal
+                $('#deletedConfirmModal')
+                if (response.status == 200){
+                    response.json().then(data => {
+                        if(data === 1){
+                            document.querySelector('a[bookid="' + bookid + '"]').parentElement.parentElement.parentElement.remove()
+                        }else{
+                            showModal(true,'Error', 'cannot conect to the server')
+                        }
+                    }).catch(error =>{
+                        showModal(true,'Error', 'cannot conect to the server')
+
+                    })
+                }else {
+                    showModal(true,'Error', 'cannot conect to the server')
+                }
+            }).catch(error => {
+                showModal(true,'Error', 'cannot conect to the server')
+            })
+        })
+    </script>
 </body>
 
 </html>

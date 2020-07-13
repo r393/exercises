@@ -376,7 +376,7 @@
             const bookTitle = document.querySelector('#bookTitleInp').value.trim()
                 if(!bookTitle){
                     showModal(true,'Book title is empty','Book Title should not be empty')
-                    // return is going to stop idf book title is empty
+                    // return is going to stop if book title is empty
                     return
                 }
                 const oldImgsElements = document.querySelectorAll('.bookimg')
@@ -388,6 +388,7 @@
                 }
                 const deletePdf = document.querySelector('#deletePdf')
                 const bookPdf = document.querySelector('#bookPdfInp').files
+                // check if the user upload or left the pdf file
                 if(!deletePdf && bookPdf.length == 0){
                     showModal(true, 'Pdf Error', 'you need either to upload a pdf file or leave the old one')
                     return
@@ -395,7 +396,6 @@
                 //collect the data to be sent to the server side
                 const fd = new FormData()
                 // ad book id to fd
-                debugger
                 fd.append('bookid','<%=book.id%>')
                 fd.append('newBookTitle', bookTitle)
                 // collect old images urls
@@ -420,11 +420,17 @@
                 if(bookPdf.length){
                     fd.append('bookPdf', bookPdf[0])
                 }
+                // get book description from html editor tinymce and append it to fd
                 fd.append('bookDescription', tinymce.get("bookDescriptionInp").getContent())
+                
+                // disabled save btn
+                btnWait(e.target, true, 'Saving....')
+                
                 fetch('/admin/editbook', {
                     method: 'POST',
                     body: fd
                 }).then(response => {
+                    btnWait(e.target, false, 'Save')
                     if(response.status == 200){
                         response.json().then(data => {
                             if (data == 1){
@@ -440,6 +446,7 @@
                     }
                 }).catch(error => {
                     showModal(true,'Error','can not send the data')
+                    btnWait(e.target, false, 'Save')
                 })
         })
 

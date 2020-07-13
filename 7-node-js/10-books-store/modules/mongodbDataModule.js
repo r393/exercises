@@ -222,17 +222,17 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
                 }
             })
 
-            // save new images to file system and to arra to be saved to db
+            // save new images to file system and array to be saved to db
             const newImgsUrlsArr = []
             newImgs.forEach((img, idx) => {
                 const imgExt = img.name.substr(img.name.lastIndexOf('.'))
-                const newImgName = newBookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx +'_'+updateNum + imgExt
+                const newImgName = newBookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx +'_'+ updateNum + imgExt
                 newImgsUrlsArr.push('/uploadedfiles/' + newImgName)
                 img.mv('./public/uploadedfiles/' + newImgName)
             })
             // delete the deleted images files from the system
             deletedImgs.forEach(file => {
-                //first check file is exist
+                //first check if file exist
                 if(fs.existsSync('./public' + file)){
                     fs.unlinkSync('./public' + file)
                 }
@@ -251,6 +251,7 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
                     update: updateNum
                 }
             })
+            client.close()
             resolve()
 
         })()
@@ -258,6 +259,46 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
         reject(error)
     }
 
+    })
+}
+function deleteBook(bookid, userid){
+    return new Promise ((resolve, reject) => {
+        getBook(bookid).then(book => {
+            // check if the book belong to the current login user
+            if(book.userid === userid){
+                // delete book images
+                book.imgs.forEach(img => {
+                    // check the img file, if exist then delete
+                    if(fs.existsSync('./public'+ img)){
+                        fs.unlinkSync('./public' + img)
+                    }
+                })
+                // delete pdf file
+                // check if pdf file exist then delete
+                if(fs.existsSync('./public'+ book.pdfUrl)){
+                    fs.unlinkSync('./public' + book.pdfUrl)
+                }
+                    connect().then(client => {
+                        const db = client.db('test1')
+                        db.collection('books').deleteOne({_id: new ObjectID(bookid)}).then(() => {
+                            client.close()
+                            resolve()
+
+                        }).catch(error => {
+                            client.close()
+                            reject(error)
+                        })
+
+                    }).catch(error => {
+                        reject(error)
+                    })
+                } else {
+                reject(new Error('Hacker! not now! '))
+            }
+
+        }).catch(error => {
+            reject(error)
+        })
     })
 }
 
@@ -269,5 +310,6 @@ module.exports = {
     getAllBooks,
     getBook,
     userBooks,
-    updateBook
+    updateBook,
+    deleteBook
 }
