@@ -1,13 +1,12 @@
 const express = require('express')
 
 const mongoose = require('mongoose')
-const e = require('express')
 
-const app = express()
 
 //KWIEVWfspfmP65Fs
 const connectionString = 'mongodb+srv://mongoose_users:KWIEVWfspfmP65Fs@cluster0.lh6tv.mongodb.net/mongoose?retryWrites=true&w=majority'
 
+const app = express()
 
 // get schema object from mongoose
 

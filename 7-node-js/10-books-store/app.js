@@ -6,7 +6,7 @@ const fs = require('fs')
 
 
 //include dataModule
-const dataModule = require('./modules/mongodbDataModule')
+const dataModule = require('./modules/mongooseDataModule')
 const adminRouter = require('./routes/adminRoute')
 
 const app = express()

@@ -1,5 +1,5 @@
 const express = require('express')
-const dataModule = require('../modules/mongodbDataModule')
+const dataModule = require('../modules/mongooseDataModule')
 
 
 const adminRouter = express.Router()
