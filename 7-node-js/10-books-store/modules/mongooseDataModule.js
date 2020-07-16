@@ -278,9 +278,9 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
             if (newPdfBook){
                 newPdfBook.mv('./public' + oldBookData.pdfUrl)
             }
-            await connect()
+           
             
-            const result = await Books.updateOne({_id: bookid}, {
+             await Books.updateOne({_id: bookid}, {
                 
                     title: newBookTitle,
                     description: bookDescription,
@@ -300,7 +300,7 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
 }
 function deleteBook(bookid, userid){
     return new Promise ((resolve, reject) => {
-        Books.then(book => {
+        getBooks(bookid).then(book => {
             // check if the book belong to the current login user
             if(book.userid === userid){
                 // delete book images
@@ -315,20 +315,20 @@ function deleteBook(bookid, userid){
                 if(fs.existsSync('./public'+ book.pdfUrl)){
                     fs.unlinkSync('./public' + book.pdfUrl)
                 }
-                    connect().then(() => {
+                    //connect().then(() => {
                        
                         Books.deleteOne({_id:bookid}).then(() => {
-                            client.close()
+                            
                             resolve()
 
                         }).catch(error => {
-                            client.close()
+                            
                             reject(error)
                         })
 
-                    }).catch(error => {
-                        reject(error)
-                    })
+                    //}).catch(error => {
+                        //reject(error)
+                    //})
                 } else {
                 reject(new Error('Hacker! not now! '))
             }
