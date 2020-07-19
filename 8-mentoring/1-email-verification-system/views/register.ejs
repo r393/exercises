@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Register
+
+    </title>
+</head>
+<body>
+    
+    <center><h1>Register Here</h1></center>
+    
+        <div>
+
+
+
+           First Name: <input type="text" placeholder="firstName" id="fnameInp">
+           <br>
+           <br>
+           Last Name: <input type="text" placeholder="lastname" id="lnameInp">
+           <br>
+           <br>
+           Password: <input type="password" id="passwordInp">
+           <br>
+           <br>
+           rePassword: <input type="password" id="repasswordInp">
+           <br>
+           <br>
+           Email: <input type="text" id="emailInp">
+           <br>
+           <br>
+           <button id="registerBtn" style="font: bold 12px">Register</button>
+        </div>
+  <script>
+        document.querySelector('#registerBtn').addEventListener('click',e => {
+          e.preventDefault()
+          const fnameElement = document.querySelector('#fnameInp')
+          const lnameElement = document.querySelector('#lnameInp')
+          const passwordElement = document.querySelector('#passwordInp')
+          const repasswordElement = document.querySelector('#repasswordInp')
+          const emailElement = document.querySelector('#emailInp')
+          if(
+              fnameElement.value.trim() &&
+              lnameElement.value.trim() &&
+              passwordElement.value &&
+              emailElement.value.trim()
+
+          ) {
+              if (passwordElement.value === repasswordElement.value){
+                  const sendData = {
+                      fname: fnameElement.value,
+                      lname: lnameElement.value,
+                      password: passwordElement.value,
+                      email: emailElement.value
+                  }
+                  // sending data using fetch
+                  fetch('/register', {
+                      method: 'POST',
+                      headers: {
+                          "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify(sendData)
+                  }).then(response => {
+                      if (response.status == 200){
+                          response.json().then(data => {
+                              if (data === 1) {
+                                  alert('kindly complete registration,check your email to verify')
+                                  fnameElement.value = ''
+                                  lnameElement.value = ''
+                                  passwordElement.value = ''
+                                  repasswordElement.value = ''
+                                  emailElement.value = ''
+                              } else {
+                                  alert('something went wrong')
+                              }
+                          }).catch(error => {
+                              alert('unknown response from server')
+                          })
+                      } else {
+                          aler('can not send data')
+                      }
+                  }).catch(error => {
+                      alert('can not send data')
+                  })
+              } else {
+                  alert('password does not match repassword field')
+              }
+          } else {
+                alert('some data are missing')
+                
+          }
+      })
+  </script>
+</body>
+</html>
