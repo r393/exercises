@@ -11,7 +11,7 @@ const app = express()
 // get schema object from mongoose
 
 
-// cosnt schema = mongoose.Schema
+// cosnt Schema = mongoose.Schema
 const {Schema} = mongoose
 
 // create users schema

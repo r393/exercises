@@ -27,8 +27,8 @@ app.post('/register', (req, res) => {
     const password = req.body.password
     const email = req.body.email
 
-    if(firstName.trim() && lastName.trim() && password && email. trim()){
-        database.register(firstName,lastName,password,email).then(() => {
+    if(firstName.trim() && lastName.trim() && password && email.trim()){
+        mongoose.register(firstName,lastName,password,email).then(() => {
             res.json(1)
         }).catch(error => {
             res.json(2)

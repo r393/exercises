@@ -3,7 +3,10 @@ const passwordHash = require('password-hash')
 
 const connectionString = 'mongodb+srv://register_mongoose:1234abc@cluster0.lh6tv.mongodb.net/register_mongoose?retryWrites=true&w=majority'
 
+const {Schema }= mongoose
 
+
+// creating schema for users
 const usersSchema = new Schema({
     firstName: {
         type: String,
