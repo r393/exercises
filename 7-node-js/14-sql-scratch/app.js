@@ -67,7 +67,7 @@ app.get('/connect', (req, res) => {
 })
 app.get('/insert',(req, res) => {
     connect().then(() => {
-        con.query("INSERT INTO users(email, password) VALUES('aaa@sss.ff', '12341234')",(error, result,fields) => {
+        con.query("INSERT INTO users(email, password) VALUES('aaa1@ssss.ff', '12341234')",(error, result,fields) => {
             console.log(error);
             console.log(result);
             console.log(fields);
@@ -78,6 +78,57 @@ app.get('/insert',(req, res) => {
             }else {
                 res.json(result)
             }
+        })
+    }).catch(error => {
+        res.send(error.message)
+    })
+})
+app.get('/select', (req, res) => {
+    connect().then(() => {
+        con.query('SELECT * FROM users', (error, result, fields) => {
+            console.log(error);
+            console.log(result);
+            console.log(fields);
+
+            if (error){
+                res.send(error.message)
+            } else {
+                res.json(result)
+            }
+        })
+    }).catch(error => {
+        res.send(error.message)
+    })
+    
+})
+app.get('/delete', (req,res) => {
+    connect().then(() => {
+        con.query('DELETE FROM users WHERE id = 1',(error, result, feilds) => {
+            console.log(error);
+            console.log(error);
+            console.log(error);
+                if(error){
+                    res.send(error.message)
+                } else {
+                    res.json(result)
+                }
+        })
+    }).catch(error => {
+        res.send(error.message)
+    })
+})
+app.get('/update', (req, res) => {
+    connect().then(() => {
+        con.query("UPDATE users SET email = 'rebecca@ reb.com' WHERE id = 5",(error, result, fields) => {
+            console.log(error);
+            console.log(result);
+            console.log(fields);
+            if(error){
+                res.send(error.message)
+            } else {
+                res.json(result)
+            }
+
         })
     }).catch(error => {
         res.send(error.message)

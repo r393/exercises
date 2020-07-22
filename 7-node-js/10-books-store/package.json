@@ -17,6 +17,7 @@
     "express-session": "^1.17.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.24",
+    "mysql": "^2.18.1",
     "nodemailer": "^6.4.10",
     "password-hash": "^1.2.2"
   }
