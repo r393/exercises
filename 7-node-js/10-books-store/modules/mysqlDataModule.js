@@ -191,32 +191,57 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
 
 function getAllBooks(){
     return new Promise((resolve, reject) => {
-        connect().then(() => {
-            
-            Books.find().then(books => {
-                // add id property to each book instead of _id
-                // this is how ituse in ejs
-                books.forEach(book => {
-                    book['id'] = book['_id']
+        
+            runQuery('SELECT books.*, imgs.* FROM books INNER JOIN imgs on books.id = imgs.bookid ').then(results => {
+                const books = []
+                results.forEach(result => {
+                    // search if the book has been added to books array
+    
+                    let book = books.find(element => element.id === result.bookid)
+                    if (book){
+                        // if the book is added before, we need only to append the imgs property with the new imgurl
+                        book.imgs.push(result.imgUrl)
+                    } else {
+                        // if the book is not added to books,
+                        // we need to add it to books and set imgs as new array with one element imgurl
+                        books.push({
+                            id: result.bookid,
+                            title: result.title,
+                            description: result.description,
+                            pdfUrl: result.pdfUrl,
+                            userid: result.userid,
+                            imgs: [result.imgUrl]
+                        })
+                    }
+                    
                 })
                 resolve(books)
             }).catch(error => {
                 reject(error)
             })
-        }).catch(error => {
-            reject(error)
-        })
+        
     })
 
 }
 function getBook(id){
     return new Promise((resolve, reject) => {
-        connect().then(()=> {
-            
-            Books.findOne({_id:id}).then(book => {
+       
+            runQuery(`SELECT books.*, imgs.* FROM books INNER JOIN imgs ON imgs.bookid = books.id WHERE imgs.bookid = ${id}`).then(results => {
                 
-                if(book){
-                    book.id = book._id
+                if(results.length){
+                    const book = {}
+                    results.forEach(result => {
+                        if(book.id){
+                            book.imgs.push(result.imgUrl)
+                        } else {
+                            book.id = result.bookid
+                            book.title = result.title
+                            book.description = result.description
+                            book.pdfUrl = result.pdfUrl
+                            book.userid = result.userid
+                            book.imgs = [result.imgUrl]
+                        }
+                    })
                     resolve(book)
                 }else{
                     reject(new Error('can not boot with this id :' + id))
@@ -224,30 +249,42 @@ function getBook(id){
             }).catch(error => {
                 reject(error)
             })
-        }).catch(error => {
-            reject(error)
-        })
+        
     })
 }
 
 function userBooks(userid){
     return new Promise((resolve, reject) => {
-        connect().then(() => {
-            
-            Books.find({userid: userid}).then(books => {
-                // add id property to each book instead of _id
-                // this is how it use in ejs
-                books.forEach(book => {
-                    book['id'] = book['_id']
-                })
-                resolve(books)
-            }).catch(error => {
-                reject(error)
+        
+        runQuery(`SELECT books.*, imgs.* FROM books INNER JOIN imgs on books.id = imgs.bookid WHERE books.userid = ${userid} `).then(results => {
+            const books = []
+            results.forEach(result => {
+                // search if the book has been added to books array
+
+                let book = books.find(element => element.id === result.bookid)
+                if (book){
+                    // if the book is added before, we need only to append the imgs property with the new imgurl
+                    book.imgs.push(result.imgUrl)
+                } else {
+                    // if the book is not added to books,
+                    // we need to add it to books and set imgs as new array with one element imgurl
+                    books.push({
+                        id: result.bookid,
+                        title: result.title,
+                        description: result.description,
+                        pdfUrl: result.pdfUrl,
+                        userid: result.userid,
+                        imgs: [result.imgUrl]
+                    })
+                }
+                
             })
+            resolve(books)
         }).catch(error => {
             reject(error)
         })
-    })
+    
+})
 
 }
 
