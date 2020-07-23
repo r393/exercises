@@ -72,6 +72,7 @@ function connect() {
             }
         }else {
             con = mySql.createConnection({
+                multipleStatements: true,
                 host: 'localhost',
                 port: 3306,
                 user: 'ubuntu',
@@ -124,12 +125,13 @@ function registerUser (email, password) {
 function checkUser (email, password){
     return new Promise ((resolve, reject) => {
         // any result from SELECT query will be return as an array(empty) array or array with one element
-            runQuery(`SELECT * FROM users WHERE email LIKE'${email}'`).then(() => {
+            runQuery(`SELECT * FROM users WHERE email LIKE '${email}';`).then((result) => {
                 console.log(result);
                 if(result.length === 0){
                     reject(3)
                 }else{
-                    if (passwordHash.verify(password, result[0].passsword)){
+                    console.log()
+                    if (passwordHash.verify(password, result[0].password)){
                         result[0]._id = result[0].id
                         resolve(result[0])
                     } else {
@@ -143,60 +145,48 @@ function checkUser (email, password){
     })
     
 }
+// make title and user id on books table uniqe together
+// ALTER TABLE books ADD UNIQUE `book_title`(userid, title); 
+
+// make imgurl and book id in imgs table unique together
+//ALTER TABLE imgs ADD UNIQUE `img_url`(bookid, imgUrl); 
 
 function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
     return new Promise((resolve, reject) =>{
-        connect().then(() => {
-            Books.findOne({title: bookTitle, userid: userid}).then(findBook => {
-                
-                if(findBook){
-                 
-                 reject(3)
-                    
-                } else {
-                    //create images array to be saved in database
-                    const imgsArr = []
-                    bookImgs.forEach((img, idx)=> {
-                        // get file extension
-                        let ext = img.name.substr(img.name.lastIndexOf('.'))
-                        //set the new image name
-                        let newName = bookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx + ext
-                        img.mv('./public/uploadedfiles/' + newName)
-                        imgsArr.push('/uploadedfiles/' + newName)
-                    })
-                    // set a new pdf file name
-                    let pdfName = bookTitle.trim().replace(/ /g, '_') + '_' + userid + '.pdf'
+        // set a new pdf file name
+        let pdfName = bookTitle.trim().replace(/ /g, '_') + '_' + userid + '.pdf'
 
-                    // move the pdf file with the new namw to uploadedfiles folder
-                    bookPdf.mv('./public/uploadedfiles/' + pdfName)
+        // move the pdf file with the new namw to uploadedfiles folder
+        bookPdf.mv('./public/uploadedfiles/' + pdfName)
 
-                    // set the pdf ur that goin to be saved in the json file
-                    let pdfNewUrl = '/uploadedfiles/' + pdfName
-
-                    const newBook = new Books({
-                        title: bookTitle,
-                        description: bookDescription,
-                        pdfUrl: pdfNewUrl,
-                        imgs: imgsArr,
-                        userid: userid
-
-                    })
-                    newBook.save().then(() => {
-                        resolve()
-                    }).catch(error => {
-                        reject(error)
-                    })
-                }
+        // set the pdf ur that goin to be saved in the json file
+        let pdfNewUrl = '/uploadedfiles/' + pdfName
+        runQuery(`INSERT INTO books (title, description, pdfUrl,userid) VALUES ('${bookTitle}','${bookDescription}','${pdfNewUrl}','${userid}')`).then(result => {
+            let saveImgsQuery = ''
+            bookImgs.forEach((img, idx)=> {
+                // get file extension
+                let ext = img.name.substr(img.name.lastIndexOf('.'))
+                //set the new image name
+                let newName = bookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx + ext
+                img.mv('./public/uploadedfiles/' + newName)
+                const imgUrl = '/uploadedfiles/' + newName
+                //imgsArr.push('/uploadedfiles/' + newName)
+                saveImgsQuery += `INSERT INTO imgs (imgUrl, bookid) VALUES ('${imgUrl}', ${result.insertId});`
+                // imgsArr.push('/uploadedfiles/' + newNqme)
+            })
+            runQuery(saveImgsQuery).then(() => {
+                resolve()
             }).catch(error => {
                 reject(error)
             })
         }).catch(error => {
-            reject(error)
+            if (error.errno === 1062) {
+                reject(3)
+            }else {
+                reject(error)
+            }
         })
-        
-    })
-    
-       
+    })      
 }
 
 function getAllBooks(){
