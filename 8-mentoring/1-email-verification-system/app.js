@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require ('./modules/mongoose')
+
+const port = process.env.PORT || 4000
 const app = express()
 
 app.use(express.urlencoded({extended: false}))
@@ -38,8 +40,8 @@ app.post('/register', (req, res) => {
     }
 })
 
-app.listen(4000, () => {
-    console.log('App listening on port 4000!')
+app.listen(port () => {
+    console.log('App listening on port '${port}'!')
 });
 
 
