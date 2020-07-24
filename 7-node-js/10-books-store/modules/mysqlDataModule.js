@@ -156,7 +156,7 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid){
         // set a new pdf file name
         let pdfName = bookTitle.trim().replace(/ /g, '_') + '_' + userid + '.pdf'
 
-        // move the pdf file with the new namw to uploadedfiles folder
+        // move the pdf file with the new name to uploadedfiles folder
         bookPdf.mv('./public/uploadedfiles/' + pdfName)
 
         // set the pdf ur that goin to be saved in the json file
@@ -312,16 +312,22 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
             })
 
             // save new images to file system and array to be saved to db
-            const newImgsUrlsArr = []
+            let newImgsQuery = ''
+            const currentTime = Date.now()
             newImgs.forEach((img, idx) => {
                 const imgExt = img.name.substr(img.name.lastIndexOf('.'))
-                const newImgName = newBookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx +'_'+ (oldBookData.__v + 1) + imgExt
-                newImgsUrlsArr.push('/uploadedfiles/' + newImgName)
+                const newImgName = newBookTitle.trim().replace(/ /g,'_')+ '_' + userid + '_' + idx +'_'+ currentTime + imgExt
+                
+                //newimgsQuery
+                const newImgUrl ='/uploadedfiles/' + newImgName
+                newImgsQuery += `INSERT INTO imgs (imgUrl, bookid) VALUES ('${newImgUrl}', ${bookid});`
                 img.mv('./public/uploadedfiles/' + newImgName)
             })
             // delete the deleted images files from the system
+            let deletedImgQuery = ''
             deletedImgs.forEach(file => {
                 //first check if file exist
+                deletedImgQuery += `DELETE FROM imgs WHERE imgUrl like '${file}' AND bookid = ${bookid};`
                 if(fs.existsSync('./public' + file)){
                     fs.unlinkSync('./public' + file)
                 }
@@ -330,18 +336,18 @@ function updateBook(bookid,newBookTitle, oldImgsUrls, bookDescription, newPdfBoo
             if (newPdfBook){
                 newPdfBook.mv('./public' + oldBookData.pdfUrl)
             }
-           
-            
-             await Books.updateOne({_id: bookid}, {
-                
-                    title: newBookTitle,
-                    description: bookDescription,
-                    imgs:[...keepImgs, ...newImgsUrlsArr],
-                    //update: updateNum,
-                    $inc: {__v: 1}
-            })
-            
+            await runQuery(`UPDATE books SET title = '${newBookTitle}', description = '${bookDescription}' WHERE id = ${bookid};` + deletedImgQuery + newImgsQuery)
             resolve()
+            //  await Books.updateOne({_id: bookid}, {
+                
+            //         title: newBookTitle,
+            //         description: bookDescription,
+            //         imgs:[...keepImgs, ...newImgsUrlsArr],
+            //         //update: updateNum,
+            //         $inc: {__v: 1}
+            // })
+            
+           
 
         })()
     }catch(error) {
