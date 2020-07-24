@@ -24,8 +24,8 @@ app.get('/register', (req,res) => {
 
 app.post('/register', (req, res) => {
     console.log(req.body)
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
+    const firstName = req.body.fname
+    const lastName = req.body.lname
     const password = req.body.password
     const email = req.body.email
 
@@ -40,8 +40,8 @@ app.post('/register', (req, res) => {
     }
 })
 
-app.listen(port () => {
-    console.log('App listening on port '${port}'!')
+app.listen(port ,() => {
+    console.log(`App listening on port ${port}`)
 });
 
 

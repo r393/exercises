@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const passwordHash = require('password-hash')
+const emailSender  = require('./emailSaver')
 
 const connectionString = 'mongodb+srv://register_mongoose:1234abc@cluster0.lh6tv.mongodb.net/register_mongoose?retryWrites=true&w=majority'
 
@@ -67,11 +68,24 @@ function register (firstName, lastName, password,email){
                 firstName: firstName,
                 lastName: lastName,
                 password: passwordHash.generate(password),
-                email: email
+                email: email,
+                verified: false
             }) 
             //Saving the new user in the database
             newUser.save().then(() => {
-                resolve()
+                // email messaage :
+                // welcome to or website. to verify your email click the following
+                // http://localhost:3000/verify/[newUser.id]
+                // https://rebecca-emailverification.herokuapp.com/
+                let message = 'Welcome to our Website\n'
+                message += 'to verify your email address please click in the following'
+                message += 'https://rebecca-emailverification.herokuapp.com/' + newUser._id
+                emailSender.emailSender(email, 'Verify Email',message).then(() => {
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })
+              
             }).catch(error => {
                 reject(error)
             })

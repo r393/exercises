@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const sensitiveData = require('./sensitiveData')
 // function saverContent(content, path){
 //     let oldDetail = nodemailer.readFileSync(path)
 //     let newDetail = oldDetail + contentfs
@@ -10,29 +11,29 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'arowosokirebecca@gmail.com',
-        pass: ''
+        pass: sensitiveData.password()
     }
 })
 
 // the client email not constant it changes
-function emailSender(name,email,subject, message, callback) {
-    
+function emailSender(email,subject, message) {
+    return new Promise((resolve, reject) => {
         const mailOption ={
             from: 'arowosokirebecca@gmail.com',
-            to: 'bukky4realie@co.uk',
+            to: email,
             subject: subject,
-            text: email + '\n'+ name + '\n' + message
+            text: message
         }
         transporter.sendMail(mailOption, function(error, info) {
             if (error){
                 console.log(error)
-                callback(false)
+                reject(error)
             }else {
                 console.log(info.response)
-                callback(true)
+                resolve(info.response)
             }
         })
-    
+    })
     
 }
     
