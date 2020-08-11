@@ -1,24 +1,26 @@
 const express = require('express')
 const path = require('path')
-const mongoose = require ('./modules/mongoose')
+const mongoose = require('./modules/mongoose')
 
 const port = process.env.PORT || 4000
 const app = express()
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({
+    extended: false
+}))
 app.use(express.json())
 
 app.set('view engine', 'ejs')
 //app.set('views','./views')
-app.set('views', path.join(__dirname,'views'))
+app.set('views', path.join(__dirname, 'views'))
 
 
 //This link us to a page with 'Hello world'
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('Hello world')
 })
 // This link us to the register page
-app.get('/register', (req,res) => {
+app.get('/register', (req, res) => {
     res.render('register')
 })
 
@@ -29,8 +31,8 @@ app.post('/register', (req, res) => {
     const password = req.body.password
     const email = req.body.email
 
-    if(firstName.trim() && lastName.trim() && password && email.trim()){
-        mongoose.register(firstName,lastName,password,email).then(() => {
+    if (firstName.trim() && lastName.trim() && password && email.trim()) {
+        mongoose.register(firstName, lastName, password, email).then(() => {
             res.json(1)
         }).catch(error => {
             res.json(2)
@@ -40,8 +42,6 @@ app.post('/register', (req, res) => {
     }
 })
 
-app.listen(port ,() => {
+app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 });
-
-
