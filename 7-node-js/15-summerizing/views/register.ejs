@@ -56,9 +56,10 @@
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
-         document.querySelector('#submitBtn').addEventListener('click',e => {
-          e.preventDefault()
-          console.log(submitBtn);
+        $(document).ready(()=>{
+            $("#submitBtn").click(e=>{
+                e.preventDefault()
+                //console.log(submitBtn);
           const nameInput = document.querySelector('#name')
           const passwordInput = document.querySelector('#password')
           const repasswordInput = document.querySelector('#re_password')
@@ -91,7 +92,7 @@
             }
             if (!checkInput.checked) {
                 checkValidation.check = false
-                checkValidation.message += 'you have to agree to usage terms \n'
+                checkValidation.message += 'you have to agree to terms of usage \n'
             }
 
             if (checkValidation.check) {
@@ -102,8 +103,14 @@
                 // e.preventDefault()
                 alert(checkValidation.message)
             }
+            })
+        })
+    //      document.querySelector('#submitBtn').addEventListener('click',e => {
+    //       e.preventDefault()
+          
+          
 
-      })
+    //   })
     </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

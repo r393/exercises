@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
-
+const logger = require("morgan")
+const debug = require('debug')
 const dbmongoose = require('./modules/dbmongoose')
 
 const app = express()
@@ -9,7 +10,8 @@ const app = express()
 //
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
-
+/////
+app.use(logger('dev'))
 //public folder url
 app.use(express.static(path.join(__dirname,'public')))
 
@@ -31,20 +33,26 @@ app.post('/register', (req, res) => {
     if (name && email && password){
         dbmongoose.register(name, email, password).then(() => {
             res.json(1)
+            //console.log(res.json(1));
         }).catch(error => {
             if(error == "exist") {
                 res.json(3)
+                //console.log(res.json(3));
             } else{
                 res.json(4)
+                //console.log(res.json(4));
             }
         })
     } else {
         res.json(2)
+        //console.log(res.json(2));
     }
+    
     
     
 })
 
 app.listen(2000, () => {
     console.log('App listening on port 2000!')
+    debug("Start Listening "+ app.get('port'))
 })
