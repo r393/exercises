@@ -35,24 +35,48 @@ document.querySelector('#submitBtn').addEventListener('click', e => {
      // nt empty not less than 10 chars and not more than 1000 char   
     let errorMsgs = '';
     if (validator.isEmpty(title)){
-        errorMsgs = 'title should not be empty';
+        errorMsgs = 'Title should not be empty';
     }
     if (!validator.isLength(title,{min: 2, max: 50})) {
-        errorMsgs += 'title length should be between 2 and 50 chars\n'
+        errorMsgs += 'Title length should be between 2 and 50 chars\n'
     }
     if (validator.isEmpty(category)){
-        errorMsgs +=  'you should choose a category\n';
+        errorMsgs +=  'You should choose a category\n';
     }
     if (validator.isEmpty(description)){
-        errorMsgs +=  'description should not be empty\n';
+        errorMsgs +=  'Description should not be empty\n';
     }
     if (!validator.isLength(description, {min: 10, max: 1000})){
-        errorMsgs += 'description lenght should be between 10 and 1000 chars\n';
+        errorMsgs += 'Description lenght should be between 10 and 1000 chars\n';
     }
     if(!errorMsgs){
-        const container = document.querySelector('#container')
-        const article = new Article(title, description, categoryObg)
-        article.render(container)
+        //send the article data to backend using fetch
+        fetch('/', {
+            method: 'POST',
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                title,
+                category,
+                description
+            })
+            }).then(response => {
+                if (response.status === 200) {
+                    const container = document.querySelector('#container')
+                    const article = new Article(title, description, categoryObg)
+                    article.render(container)
+                    response.json().then(data => {
+                        alert(data)
+                    }).catch(error => {
+                        alert(error)
+                    })
+                }
+            }).catch(error => {
+                alert(error)
+            })
+        
+        
     } else {
         alert(errorMsgs)
     }
