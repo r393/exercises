@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+    .container>div>img {
+    padding: 3px;
+    background-color: aliceblue;
+    margin: 5px;
+    cursor: pointer;
+    } 
+    .container>div>div>img{
+        height: 80%;
+        /* margin: auto; */
+    }
