@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import SearchBar from './components/SearchBar'
 
 
 const App = () => {
     return(
-        <div>Hi There!</div>
+        <div className="container">
+            <SearchBar />
+        </div>
     )
 
 }
