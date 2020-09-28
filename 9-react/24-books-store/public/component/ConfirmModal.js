@@ -13,7 +13,6 @@ class ConfirmModal extends React.Component {
     }
     
   render() {
-    console.log(this.props);
       const {className, title, children} = this.props
     return (
       <Modal isOpen={this.props.show} toggle={this.toggle}  >

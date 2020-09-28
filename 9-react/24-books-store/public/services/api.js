@@ -1,3 +1,4 @@
+
 export const registerPost = (email, password, repassword) => {
     const sendData = {
         email,
@@ -183,3 +184,82 @@ export const deleteBookPost = (bookid) => {
         })
     })
 } 
+
+export const editBookPost = (bookTitle, bookDescription, bookOldImgs, booknewImgs, bookPdf, bookid) => {
+    return new Promise((resolve, reject) => {
+        const fd = new FormData()
+        fd.append('bookid', bookid)
+        fd.append('newBookTitle', bookTitle)
+        fd.append('oldImgsUrls',JSON.stringify(bookOldImgs))
+        for (let i = 0; i < booknewImgs.length; i++) {
+            fd.append('bookImg' + i, booknewImgs[i])
+        }
+        if (bookPdf) {
+            fd.append('bookPdf', bookPdf)
+        }
+        fd.append('bookDescription', bookDescription)
+        fetch('/admin/editbook', {
+            method: 'POST',
+            body: fd
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(data => {
+                    resolve(data)
+                }).catch(error => {
+                    reject(error)
+                })
+            } else {
+                reject(new Error('can not get the data, response number is: ' + response.status))
+            }
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+export const logoutPost = () => {
+    return new Promise((resolve, reject) => {
+        fetch('/admin/logout', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    resolve(data)
+                }).catch(error => {
+                    reject(error)
+                })
+            } else {
+                reject(new Error('can not get the data, response number is: ' + response.status))
+            }
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+
+export const checkLoginPost = () => {
+    return new Promise((resolve, reject) => {
+        fetch('/checklogin', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    resolve(data)
+                }).catch(error => {
+                    reject(error)
+                })
+            } else {
+                reject(new Error('can not get the data, response number is: ' + response.status))
+            }
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}

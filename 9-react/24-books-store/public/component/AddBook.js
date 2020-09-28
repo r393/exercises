@@ -6,7 +6,7 @@ import {addBookPost} from '../services/api'
 
 const AddBook = () => {
 
-
+const history = useHistory()
 
   const intialState = {
     bookTitle: '',
@@ -83,10 +83,9 @@ const AddBook = () => {
                       modalClass: 'bg-danger'
                     })
                     break;
-                    case 10:
-                      history.push('/login')
-                      break
-            
+                case 10:
+                  history.push('/login')
+                  break;
               default:
                 break;
             }

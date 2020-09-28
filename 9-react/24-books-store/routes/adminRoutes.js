@@ -1,3 +1,4 @@
+const { json } = require('express')
 const express = require('express')
 const dataModule = require('../modules/mongooseDataModule')
 // error number 10 means session is over
@@ -76,10 +77,10 @@ adminRouter.post('/mybooks', (req, res) => {
         res.json(2);
     })
 })
-// adminRouter.get('/logout', (req, res) => {
-//     req.session.destroy()
-//     res.redirect('/login')
-// })
+adminRouter.post('/logout', (req, res) => {
+    req.session.destroy()
+    res.json(10)
+})
 // adminRouter.get('/mybook/:id', (req, res) => {
 //     const bookid = req.params.id
 //     dataModule.getBook(bookid).then(book => {
@@ -115,10 +116,15 @@ adminRouter.post('/editbook', (req, res) => {
 
     //console.log(oldImgsUrlsArr);
     
-    dataModule.updateBook(bookid, newBookTitle, oldImgsUrlsArr, bookDescription, newPdfBook, newImgs, req.session.user._id ).then(() => {
-res.json(1)
+    dataModule.updateBook(bookid, newBookTitle, oldImgsUrlsArr, bookDescription, newPdfBook, newImgs, req.session.user._id ).then((book) => {
+res.json(book)
     }).catch(error => {
-res.json(2)
+        if(error === 'hack'){
+            res.json(100)
+        }else{
+            res.json(2)
+        }
+
     })
     
 

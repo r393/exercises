@@ -16,7 +16,6 @@ class Register extends React.Component {
 
   onRegisterBtnClick = (e) => {
     e.preventDefault()
-    console.log(this.state);
     if (this.state.email.trim() === '' || this.state.password === '' || this.state.password !== this.state.repassword || !validator.isEmail(this.state.email.trim())) {
       const errorsElement = (
 
@@ -43,7 +42,6 @@ class Register extends React.Component {
       this.setState({errorCompenent: errorsElement, showErrorModal: true})
     } else {
       registerPost(this.state.email, this.state.password, this.state.repassword).then(data => {
-        console.log(data);
 
         let badgClass = ''
         let badgMessage =''
@@ -76,7 +74,6 @@ class Register extends React.Component {
 
 
       }).catch(error => {
-        console.log(error);
         const badge = (
           <div className="alert alert-danger" role="alert">
                       can not send the registration data to server
@@ -91,7 +88,6 @@ class Register extends React.Component {
   }
 
   closeModal = () => {
-    console.log('I am called from the child');
     this.setState({showErrorModal: false})
   }
   render() {

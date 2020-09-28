@@ -84,15 +84,22 @@ app.post('/getbook', (req, res) => {
     const bookId = req.body.id
     
     dataModule.getBook(bookId).then(data => {
-        res.json({
-            book: data,
-            login: req.session.user != null
-        })
+        if (!req.session.user) {
+            data.pdfUrl = null
+        }
+        res.json(data)
     }).catch(error => {
         res.json(2)
     })
 });
 
+app.post('/checklogin', (req, res) => {
+    if(req.session.user){
+        res.json(req.session.user.email)
+    } else{
+        res.json(10)
+    }
+});
 
 app.use('/admin', adminRoutes);
 

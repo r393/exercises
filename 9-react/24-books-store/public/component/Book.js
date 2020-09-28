@@ -17,11 +17,13 @@ const Book = () => {
 
   useEffect(() => {
     getBookPost(params.id).then(data => {
-      console.log(data);
-      setState({
+      if(data != 2){
+        setState({
         ...state,
         book: data
       })
+      }
+      
     })
   }, [])
   if (state.book) {
